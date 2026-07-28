@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+src/trace/__init__.py
+src/trace.egg-info/PKG-INFO
+src/trace.egg-info/SOURCES.txt
+src/trace.egg-info/dependency_links.txt
+src/trace.egg-info/entry_points.txt
+src/trace.egg-info/requires.txt
+src/trace.egg-info/top_level.txt
+src/trace/core/__init__.py
+src/trace/core/metadata.py

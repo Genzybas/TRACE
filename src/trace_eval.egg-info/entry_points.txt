@@ -1,0 +1,2 @@
+[console_scripts]
+trace-eval = trace.cli:main

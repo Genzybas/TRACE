@@ -1,0 +1,37 @@
+# TRACE: Behaviour-Centric Evaluation Protocol for LLM Agents
+
+TRACE is a production-grade, domain-driven Python research framework implementing the multi-dimensional evaluation protocol described in our manuscript[cite: 1]. 
+
+Rather than relying solely on task completion rates, TRACE assesses autonomous Large Language Model (LLM) agents by examining observable execution evidence across cognitive, operational, and reliability dimensions[cite: 1].
+
+---
+
+## 🔄 Behavioral Evaluation Pipeline
+
+The framework implements a layered evaluation pipeline[cite: 1]:
+
+$$\text{ObservableEvidence} \longrightarrow \text{BehaviourTrace} \longrightarrow \text{BehaviourVector} \longrightarrow \text{BehaviourProfile} \longrightarrow \text{BehaviourConfidence} \longrightarrow \text{BehaviourSignature} \longrightarrow \text{TRACE Score}$$
+
+1. **ObservableEvidence**: Primitive execution events (reasoning steps, tool calls, errors, latencies)[cite: 1].
+2. **BehaviourTrace ($BT$)**: Chronologically ordered sequence of execution events ($BT = (e_1, e_2, \dots, e_n)$)[cite: 1].
+3. **BehaviourVector ($BV$)**: Normalized feature vector derived via interpretation ($\Phi: BT \to BV$)[cite: 1].
+4. **BehaviourProfile ($BP$)**: Hierarchical aggregation into Cognitive ($C$), Operational ($O$), and Reliability ($R$) scores[cite: 1].
+5. **Behavioural Confidence ($\kappa$)**: Exponential stability model ($\kappa = \exp(-\lambda \sigma_B)$) measuring reproducibility across repeated runs[cite: 1].
+6. **BehaviouralSignature ($BS$)**: Diagnostic tuple summarizing agent performance and stability ($BS = (C, O, R, \kappa)$)[cite: 1].
+7. **TRACE Score**: Confidence-adjusted evaluation score ($S_{\text{Final}} = \kappa \cdot S_{\text{TRACE}}$)[cite: 1].
+
+---
+
+## 🛠️ Installation & Setup
+
+### Prerequisites
+- Python 3.10+
+
+### Local Installation
+```bash
+# Clone repository
+git clone [https://github.com/genzybas/trace.git](https://github.com/genzybas/trace.git)
+cd trace
+
+# Install package in editable mode with development dependencies
+pip install -e .[dev]
