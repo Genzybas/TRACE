@@ -5,7 +5,7 @@ Unit tests for TRACE BehaviourVector domain models and normalization logic.
 import pytest
 from pydantic import ValidationError
 
-from trace.domain.vector import BehaviourVector, NormalizedBehaviourVector
+from trace_eval.domain.vector import BehaviourVector, NormalizedBehaviourVector
 
 
 def test_behaviour_vector_creation():

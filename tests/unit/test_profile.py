@@ -5,8 +5,8 @@ Unit tests for TRACE BehaviourProfile and CategoryWeights.
 import pytest
 from pydantic import ValidationError
 
-from trace.domain.profile import BehaviourProfile, CategoryWeights
-from trace.domain.vector import NormalizedBehaviourVector
+from trace_eval.domain.profile import BehaviourProfile, CategoryWeights
+from trace_eval.domain.vector import NormalizedBehaviourVector
 
 
 def test_category_weights_valid_default():

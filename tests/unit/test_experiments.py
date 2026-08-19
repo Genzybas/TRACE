@@ -3,10 +3,10 @@ Unit tests for TRACE Experiment Runner and LaTeX Exporter.
 """
 
 from datetime import datetime, timedelta, timezone
-from trace.domain.primitives import EventCategory, ObservableEvidence
-from trace.domain.trace import BehaviourTrace
-from trace.experiments.exporter import LaTeXExporter
-from trace.experiments.runner import ExperimentRunner
+from trace_eval.domain.primitives import EventCategory, ObservableEvidence
+from trace_eval.domain.trace import BehaviourTrace
+from trace_eval.experiments.exporter import LaTeXExporter
+from trace_eval.experiments.runner import ExperimentRunner
 
 
 def test_experiment_runner_and_exporter():

@@ -6,11 +6,11 @@ from datetime import datetime, timezone
 import os
 import tempfile
 
-from trace.domain.primitives import EventCategory, ObservableEvidence
-from trace.domain.trace import BehaviourTrace
-from trace.experiments.exporters_multi import MultiFormatExporter
-from trace.experiments.runner import ExperimentRunner
-from trace.experiments.visualizer import TRACEVisualizer
+from trace_eval.domain.primitives import EventCategory, ObservableEvidence
+from trace_eval.domain.trace import BehaviourTrace
+from trace_eval.experiments.exporters_multi import MultiFormatExporter
+from trace_eval.experiments.runner import ExperimentRunner
+from trace_eval.experiments.visualizer import TRACEVisualizer
 
 
 def test_visualizer_and_multi_exporters():

@@ -1,11 +1,12 @@
 """
 Unit tests for TRACE feature extraction logic.
 """
-
 from datetime import datetime, timedelta, timezone
-from trace.domain.primitives import EventCategory, ObservableEvidence
-from trace.domain.trace import BehaviourTrace
-from trace.interpretation.extractor import DefaultBehaviourFeatureExtractor
+import pytest
+
+from trace_eval.domain.primitives import EventCategory, ObservableEvidence
+from trace_eval.domain.trace import BehaviourTrace
+from trace_eval.interpretation.extractor import DefaultBehaviourFeatureExtractor
 
 
 def test_extractor_feature_derivation():

@@ -3,9 +3,9 @@ End-to-End Integration tests verifying the complete TRACE pipeline.
 """
 
 from datetime import datetime, timedelta, timezone
-from trace.domain.primitives import EventCategory, ObservableEvidence
-from trace.domain.trace import BehaviourTrace
-from trace.pipeline import TRACEPipeline
+from trace_eval.domain.primitives import EventCategory, ObservableEvidence
+from trace_eval.domain.trace import BehaviourTrace
+from trace_eval.pipeline import TRACEPipeline
 
 
 def test_full_pipeline_execution():

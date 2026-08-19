@@ -3,7 +3,7 @@ requires = ["setuptools>=68.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "trace"
+name = "trace-eval"
 version = "0.1.0"
 description = "TRACE: A Multi-Dimensional Behaviour-Centric Evaluation Protocol for LLM Agents"
 readme = "README.md"
@@ -43,11 +43,11 @@ dev = [
 ]
 
 [project.scripts]
-trace = "trace.cli:main"
+trace-eval = "trace_eval.cli:main"
 
 [tool.pytest.ini_options]
 minversion = "8.0"
-addopts = "-ra -q --strict-markers --cov=trace --cov-report=term-missing"
+addopts = "-ra -q --strict-markers --cov=trace_eval --cov-report=term-missing"
 testpaths = ["tests"]
 pythonpath = ["."]
 

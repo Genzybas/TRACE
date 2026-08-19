@@ -5,8 +5,8 @@ Unit tests for TRACE Behavioural Confidence estimation.
 import math
 import pytest
 
-from trace.assessment.confidence import BehaviourConfidenceEstimator
-from trace.domain.vector import BehaviourVector
+from trace_eval.assessment.confidence import BehaviourConfidenceEstimator
+from trace_eval.domain.vector import BehaviourVector
 
 
 def test_confidence_identical_vectors_returns_one():

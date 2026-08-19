@@ -2,7 +2,7 @@
 Unit tests for TRACE Synthetic Trace Generator.
 """
 
-from trace.experiments.generator import SyntheticTraceGenerator
+from trace_eval.experiments.generator import SyntheticTraceGenerator
 
 
 def test_synthetic_trace_generator_single():

@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 import pytest
 from pydantic import ValidationError
 
-from trace.domain.primitives import EventCategory, ObservableEvidence
+from trace_eval.domain.primitives import EventCategory, ObservableEvidence
 
 
 def test_observable_evidence_instantiation():

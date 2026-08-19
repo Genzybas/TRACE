@@ -5,8 +5,8 @@ Unit tests for TRACE BehaviourSignature and score calculations.
 import pytest
 from pydantic import ValidationError
 
-from trace.assessment.signature import BehaviourSignature, GlobalCategoryWeights
-from trace.domain.profile import BehaviourProfile
+from trace_eval.assessment.signature import BehaviourSignature, GlobalCategoryWeights
+from trace_eval.domain.profile import BehaviourProfile
 
 
 def test_global_weights_validation():

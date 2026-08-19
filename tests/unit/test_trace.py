@@ -6,8 +6,8 @@ from datetime import datetime, timedelta, timezone
 import pytest
 from pydantic import ValidationError
 
-from trace.domain.primitives import EventCategory, ObservableEvidence
-from trace.domain.trace import BehaviourTrace
+from trace_eval.domain.primitives import EventCategory, ObservableEvidence
+from trace_eval.domain.trace import BehaviourTrace
 
 
 @pytest.fixture
