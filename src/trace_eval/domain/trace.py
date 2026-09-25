@@ -52,6 +52,20 @@ class BehaviourTrace(BaseModel):
         description="Global trace metadata (environment setup, parameters, model configuration).",
     )
 
+    @property
+    def observed_duration_ms(self) -> float:
+        """Return wall-clock duration when timestamps are available.
+
+        Event latency is not always equal to elapsed execution time: tool calls
+        can overlap and adapters may record only a subset of events. TRACE
+        therefore preserves both measures. Consumers should prefer this value
+        for an observed trace duration and fall back to ``total_duration_ms``
+        when a trace has fewer than two timestamps.
+        """
+        if len(self.events) < 2:
+            return self.total_duration_ms
+        return max(0.0, (self.events[-1].timestamp - self.events[0].timestamp).total_seconds() * 1000)
+
     @field_validator("events")
     @classmethod
     def validate_chronological_order(

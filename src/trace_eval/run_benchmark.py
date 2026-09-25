@@ -5,6 +5,7 @@ from trace_eval.experiments.exporters_multi import MultiFormatExporter
 from trace_eval.experiments.visualizer import TRACEVisualizer
 
 def main():
+    print("WARNING: This script creates synthetic development fixtures only. Its output must not be reported as experimental evidence.")
     print("1. Generating synthetic benchmark traces for 5 agent ecosystems...")
     # Generate benchmark dataset matching manuscript Section 4.2
     generator = SyntheticTraceGenerator(seed=42)

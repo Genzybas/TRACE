@@ -59,12 +59,12 @@ class TRACEPipeline:
             raise ValueError("Trace sequence cannot be empty for agent evaluation.")
 
         raw_vectors: List[BehaviourVector] = [self.extractor.extract(tr) for tr in traces]
+        normalized_vectors: List[NormalizedBehaviourVector] = [
+            vec.normalize(self.min_bounds, self.max_bounds) for vec in raw_vectors
+        ]
         profiles: List[BehaviourProfile] = [
-            BehaviourProfile.from_normalized_vector(
-                vec.normalize(self.min_bounds, self.max_bounds),
-                self.category_weights,
-            )
-            for vec in raw_vectors
+            BehaviourProfile.from_normalized_vector(vec, self.category_weights)
+            for vec in normalized_vectors
         ]
 
         # Compute average profile metrics across N runs
@@ -81,6 +81,12 @@ class TRACEPipeline:
         )
 
         # Compute Behavioural Confidence \kappa
-        kappa = self.confidence_estimator.compute_confidence(raw_vectors)
+        # Confidence must be computed on a common, bounded feature scale. Raw
+        # event rates and latency-derived values otherwise dominate distance.
+        confidence_vectors = [
+            BehaviourVector(trace_id=vec.trace_id, agent_id=vec.agent_id, features=vec.normalized_features)
+            for vec in normalized_vectors
+        ]
+        kappa = self.confidence_estimator.compute_confidence(confidence_vectors)
 
         return BehaviourSignature.create(avg_profile, kappa)
