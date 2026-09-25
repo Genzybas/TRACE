@@ -1,0 +1,84 @@
+[build-system]
+requires = ["setuptools>=68.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trace-eval"
+version = "0.1.0"
+description = "TRACE: A Multi-Dimensional Behaviour-Centric Evaluation Protocol for LLM Agents"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "TRACE Research Team"}
+    
+]
+keywords = ["llm-agents", "evaluation", "behavioural-analysis", "ai-safety", "benchmark", "trace",
+    "behaviour",
+    "evaluation",
+    "nlp",
+    "artificial-intelligence",
+    "llm",
+    "research"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "pydantic>=2.6.0",
+    "numpy>=1.24.0",
+    "matplotlib>=3.8.0",
+    "openai>=1.0.0",
+    "anthropic>=0.40.0",
+    "google-genai>=1.0.0",
+    "openai>=1.0.0",
+    "anthropic>=0.40.0",
+    "google-genai>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+    "black>=24.1.0",
+    "ruff>=0.2.0",
+    "mypy>=1.8.0",
+]
+
+[project.scripts]
+trace-eval = "trace_eval.cli:main"
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra -q --strict-markers --cov=trace_eval --cov-report=term-missing"
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+ignore_missing_imports = true
+
+
+
+
+
+
+
+
+
+
+
+
