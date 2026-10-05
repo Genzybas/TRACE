@@ -15,6 +15,13 @@ Requires-Python: >=3.10
 Description-Content-Type: text/markdown
 Requires-Dist: pydantic>=2.6.0
 Requires-Dist: numpy>=1.24.0
+Requires-Dist: matplotlib>=3.8.0
+Requires-Dist: openai>=1.0.0
+Requires-Dist: anthropic>=0.40.0
+Requires-Dist: google-genai>=1.0.0
+Requires-Dist: openai>=1.0.0
+Requires-Dist: anthropic>=0.40.0
+Requires-Dist: google-genai>=1.0.0
 Provides-Extra: dev
 Requires-Dist: pytest>=8.0.0; extra == "dev"
 Requires-Dist: pytest-cov>=4.1.0; extra == "dev"
@@ -59,3 +66,65 @@ cd trace
 
 # Install package in editable mode with development dependencies
 pip install -e .[dev]
+```
+
+## Real experimental workflow
+
+The legacy synthetic generator is retained only for unit tests and interface
+development. It must not be used to produce manuscript claims about any model.
+For a real TRACE study, create an experiment manifest before execution, record
+one JSONL `ExecutionRecord` per actual run, then analyse the completed matrix.
+
+```bash
+trace-eval analyze \
+  --manifest examples/experiment_manifest.template.json \
+  --runs data/real_execution_records.jsonl \
+  --output results/study_001
+```
+
+The analyzer rejects missing agent--task conditions, duplicate run IDs, and
+conditions whose run count differs from `repeated_runs_per_condition`. It writes
+`study_result.json`, `agent_summary.csv`, `condition_results.csv`, and an
+immutable `reproducibility_record.json` for the Results section.
+
+### Recording observable events
+
+Instrument the agent adapter only at observable boundaries. Do not record or
+request private chain-of-thought. The payload should contain permitted action
+inputs, outputs, status, tool identifiers, and environment metadata.
+
+```python
+from trace_eval.experiments import TraceRecorder
+from trace_eval.domain.primitives import EventCategory
+
+recorder = TraceRecorder("run-001", "reasoning-01", "agent-a")
+recorder.record(EventCategory.PLANNING, "create_plan", latency_ms=12.4)
+recorder.record(EventCategory.TOOL_USE, "calculator", latency_ms=48.1)
+trace = recorder.finalize()
+```
+
+Wrap the completed trace in an `ExecutionRecord` containing the externally
+scored `success_score`, observed outcome, and end-to-end agent latency.
+
+### Required task coverage
+
+The manifest template requires the seven task categories specified by the
+manuscript: reasoning, planning, tool-assisted execution, memory, adaptive
+execution, failure recovery, and end-to-end execution. It also records model
+versions, generation settings, tools, environment, normalization bounds,
+weights, seeds, and failure-handling rules. These values are copied unchanged
+to the reproducibility record.
+
+## Real-agent study execution
+
+The real study path uses provider adapters and writes one validated `ExecutionRecord` per execution. It does not use the synthetic trace generator.
+
+1. Install provider SDKs with `pip install -e ".[dev]"`.
+2. Set provider API keys as environment variables; never commit them.
+3. Lock every `model_version` and Qwen `base_url` in `experiment_manifest.json`.
+4. Run a small pilot before the final study.
+5. Run the final study with `python -m trace_eval.experiments.run_real --manifest .\experiment_manifest.json --runs .\data\real_execution_records.jsonl --seed 42`.
+6. Analyze with the existing `python -m trace_eval.cli analyze --manifest .\experiment_manifest.json --runs .\data\real_execution_records.jsonl --output .\results\final_study` command.
+7. Generate manuscript figures with `python -m trace_eval.experiments.figure_cli --study .\results\final_study\study_result.json --output .\results\final_study\figures`.
+
+Adapters record externally observable tool, planning, memory, environment, action, system, and error events. They deliberately do not request or store private chain-of-thought.
